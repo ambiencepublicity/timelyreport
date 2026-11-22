@@ -305,7 +305,7 @@ function build() {
   /* POSTS (with related posts) */
   for (const post of posts) {
     const related = getRelated(post, posts).map(relatedCard).join("\n");
-    writeFile(path.join("posts", post.slug, "index.html"),
+    writeFile(path.join("blog", post.slug, "index.html"),
       page(inner("post.html", { ...post, content: post.html, relatedPosts: related }), {
         title: `${post.title} — ${SITE.name}`,
         description: post.description,
