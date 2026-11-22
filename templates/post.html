@@ -1,0 +1,32 @@
+<article class="post">
+  <header class="post-header">
+    {{#if categoryUrl}}<a class="kicker" href="{{ categoryUrl }}">{{ category }}</a>{{/if}}
+    <h1>{{ title }}</h1>
+    <p class="meta meta-lg">
+      <time datetime="{{ isoDate }}">{{ dateFormatted }}</time><span class="meta-dot">·</span>{{ readingTime }}
+    </p>
+  </header>
+
+  {{#if featuredImage}}
+  <figure class="post-figure">
+    <img src="{{ featuredImage }}" alt="{{ featuredImageAlt }}">
+  </figure>
+  {{/if}}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    <p><a class="back-link" href="/">← All posts</a></p>
+  </footer>
+</article>
+
+{{#if relatedPosts}}
+<section class="related">
+  <h2 class="related-heading">Related posts</h2>
+  <div class="related-grid">
+    {{ relatedPosts }}
+  </div>
+</section>
+{{/if}}

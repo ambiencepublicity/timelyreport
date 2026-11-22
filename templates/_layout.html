@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  {{#if featuredImageAbs}}<meta property="og:image" content="{{ featuredImageAbs }}">{{/if}}
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="masthead-brand" href="/">{{ siteName }}</a>
+      {{#if tagline}}<p class="masthead-tagline">{{ tagline }}</p>{{/if}}
+      <nav class="masthead-nav">{{ navLinks }}</nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="layout">
+      <div class="layout-content">
+        {{ content }}
+      </div>
+      <aside class="sidebar">
+        {{ sidebar }}
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© {{ year }} {{ siteName }}</p>
+      {{#if footerText}}<p class="footer-note">{{ footerText }}</p>{{/if}}
+    </div>
+  </footer>
+</body>
+</html>

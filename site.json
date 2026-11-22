@@ -1,0 +1,10 @@
+{
+  "name": "The Standard Blog",
+  "tagline": "Notes, stories, and tutorials.",
+  "description": "A standard blog about things I'm learning and building.",
+  "url": "https://your-site.netlify.app",
+  "nav": [
+    { "label": "GitHub", "url": "https://github.com/yourusername" }
+  ],
+  "footerText": "All posts are written in Markdown and deployed automatically via Netlify."
+}
