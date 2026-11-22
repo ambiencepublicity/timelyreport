@@ -287,7 +287,13 @@ function build() {
   };
 
   const inner = (name, data) => render(loadTemplate(name), { ...siteData, ...data });
-  const page = (html, data) => render(loadTemplate("_layout.html"), { ...siteData, content: html, ...data });
+  
+  /* UPDATED: Page helper now calculates canonicalUrl */
+  const baseUrl = SITE.url.replace(/\/+$/, "");
+  const page = (html, data, relPath = "/") => {
+    const canonicalUrl = relPath === "/" ? `${baseUrl}/` : `${baseUrl}${relPath}`;
+    return render(loadTemplate("_layout.html"), { ...siteData, content: html, canonicalUrl, ...data });
+  };
 
   const writeFile = (rel, html) => {
     const full = path.join(OUT_DIR, rel);
@@ -300,7 +306,7 @@ function build() {
   writeFile("index.html", page(inner("index.html", {
     featuredPost: featured ? leadCard(featured) : "",
     postList: rest.map(rowCard).join("\n"),
-  }), { title: SITE.name, description: SITE.description || SITE.tagline }));
+  }), { title: SITE.name, description: SITE.description || SITE.tagline }, "/"));
 
   /* POSTS (with related posts) */
   for (const post of posts) {
@@ -310,7 +316,7 @@ function build() {
         title: `${post.title} — ${SITE.name}`,
         description: post.description,
         featuredImageAbs: post.featuredImage ? new URL(post.featuredImage, SITE.url).href : "",
-      }));
+      }, post.url));
   }
 
   /* CATEGORIES */
@@ -323,13 +329,14 @@ function build() {
       }), {
         title: `${cat.name} — ${SITE.name}`,
         description: `All posts in ${cat.name}`,
-      }));
+      }, cat.url));
   }
 
   /* 404 */
   writeFile("404.html", page(
     `<div class="notfound"><h1>404 — page not found</h1><p><a class="back-link" href="/">← Back to home</a></p></div>`,
-    { title: `Not found — ${SITE.name}`, description: "" }
+    { title: `Not found — ${SITE.name}`, description: "" },
+    "/404.html"
   ));
 
   /* NEW — SEO files: regenerated on every build */
