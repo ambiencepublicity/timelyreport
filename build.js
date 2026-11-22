@@ -278,13 +278,14 @@ function build() {
   ].join("\n");
 
   const siteData = {
-    siteName: SITE.name,
-    tagline: SITE.tagline || "",
-    footerText: SITE.footerText || "",
-    navLinks: navHtml,
-    sidebar: buildSidebar(posts, categories),
-    year: new Date().getFullYear(),
-  };
+  siteName: SITE.name,
+  tagline: SITE.tagline || "",
+  footerText: SITE.footerText || "",
+  navLinks: navHtml,
+  sidebar: buildSidebar(posts, categories),
+  analyticsId: SITE.analyticsId || "",
+  year: new Date().getFullYear(),
+};
 
   const inner = (name, data) => render(loadTemplate(name), { ...siteData, ...data });
   
