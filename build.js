@@ -17,7 +17,7 @@ function loadSiteConfig() {
 const SITE = loadSiteConfig();
 
 /* ---------- Paths ---------- */
-const POSTS_DIR = path.join(ROOT, "content", "posts");
+const POSTS_DIR = path.join(ROOT, "content", "blog");
 const TEMPLATES_DIR = path.join(ROOT, "templates");
 const STATIC_DIR = path.join(ROOT, "static");
 const OUT_DIR = path.join(ROOT, "dist");
@@ -77,7 +77,7 @@ function getPosts() {
 
       const post = {
         slug,
-        url: `/posts/${slug}/`,
+        url: `/blog/${slug}/`,
         title: fm.title || slug,
         description: fm.description || "",
         category: fm.category || "",
