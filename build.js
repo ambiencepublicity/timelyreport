@@ -32,6 +32,15 @@ const formatDate = (d) =>
 const readingTime = (md) =>
   `${Math.max(1, Math.round(md.trim().split(/\s+/).length / 200))} min read`;
 
+/* NEW — XML escaping for sitemap URLs */
+const escapeXml = (s) =>
+  String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+
 function copyDir(src, dest) {
   if (!fs.existsSync(src)) return;
   fs.mkdirSync(dest, { recursive: true });
@@ -98,6 +107,60 @@ function getCategories(posts) {
     }).posts.push(p);
   }
   return map;
+}
+
+/* ---------- NEW: SEO — sitemap.xml + robots.txt ---------- */
+function buildSitemap(posts, categories) {
+  const base = SITE.url.replace(/\/+$/, "");
+
+  if (/your-site\.netlify\.app|example\.com/.test(base)) {
+    console.warn('⚠️  site.json → "url" is still a placeholder. Set your real domain for an accurate sitemap.');
+  }
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const urls = [
+    // Home
+    { loc: `${base}/`, lastmod: today, changefreq: "daily", priority: "1.0" },
+    // Every post — lastmod uses the post's own date
+    ...posts.map((p) => ({
+      loc: `${base}${p.url}`,
+      lastmod: p.isoDate.split("T")[0],
+      changefreq: "monthly",
+      priority: "0.8",
+    })),
+    // Every category
+    ...Object.values(categories).map((c) => ({
+      loc: `${base}${c.url}`,
+      lastmod: today,
+      changefreq: "weekly",
+      priority: "0.6",
+    })),
+  ];
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (u) => `  <url>
+    <loc>${escapeXml(u.loc)}</loc>
+    <lastmod>${u.lastmod}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`
+  )
+  .join("\n")}
+</urlset>
+`;
+}
+
+function buildRobots() {
+  const base = SITE.url.replace(/\/+$/, "");
+  return `User-agent: *
+Allow: /
+
+Sitemap: ${base}/sitemap.xml
+`;
 }
 
 /* ---------- Shared components ---------- */
@@ -269,8 +332,12 @@ function build() {
     { title: `Not found — ${SITE.name}`, description: "" }
   ));
 
+  /* NEW — SEO files: regenerated on every build */
+  writeFile("sitemap.xml", buildSitemap(posts, categories));
+  writeFile("robots.txt", buildRobots());
+
   copyDir(STATIC_DIR, OUT_DIR);
-  console.log(`✅ "${SITE.name}" — ${posts.length} post(s), ${Object.keys(categories).length} category page(s) → dist/`);
+  console.log(`✅ "${SITE.name}" — ${posts.length} post(s), ${Object.keys(categories).length} category page(s), sitemap.xml + robots.txt → dist/`);
 }
 
 build();
