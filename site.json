@@ -3,6 +3,7 @@
   "tagline": "",
   "description": "Timely Report covers the latest news, viral trends, and diverse topics. We keep you informed on what’s happening right now",
   "url": "https://timelyreport.netlify.app",
+  "analyticsId": "G-XXXXXXXXXX",
   "nav": [
     { "label": "GitHub", "url": "https://github.com/yourusername" }
   ],
