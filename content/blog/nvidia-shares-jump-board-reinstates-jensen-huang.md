@@ -1,6 +1,6 @@
 ---
 title: "Nvidia Shares Jump Over 30% After Board Reinstates Jensen Huang as CEO"
-date: 2026-11-23
+date: 2026-11-24
 slug: "nvidia-shares-jump-board-reinstates-jensen-huang"
 description: "Nvidia shares climbed more than 31 percent in premarket trading after the chipmaker's board reinstated co-founder Jensen Huang as president and CEO."
 category: Global
