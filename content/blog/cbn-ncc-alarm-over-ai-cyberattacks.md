@@ -1,6 +1,6 @@
 ---
 title: "CBN and NCC Raise Alarm Over AI-Powered Cyberattacks"
-date: 2026-11-24
+date: 2026-11-22
 slug: "cbn-ncc-alarm-over-ai-cyberattacks"
 description: "The CBN and NCC warn that criminals are using AI-powered cyberattacks to defraud individuals, businesses and financial institutions."
 category: Nigeria
