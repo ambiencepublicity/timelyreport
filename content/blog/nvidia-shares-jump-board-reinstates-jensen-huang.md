@@ -1,4 +1,3 @@
-```markdown
 ---
 title: "Nvidia Shares Jump Over 30% After Board Reinstates Jensen Huang as CEO"
 date: 2026-11-23
