@@ -20,4 +20,3 @@ In its announcement on Monday, Nvidia said the board was satisfied with Huang's 
 > "The Board believes Jensen is the right person to lead NVIDIA, and that his reinstatement is in the best interests of our stockholders, employees, partners and customers," said **Harvey C. Jones**, chairman of Nvidia's board.
 
 Huang said he was honoured to return to lead the company and thanked the board, Kress and employees for their support during his absence. The sharp premarket rally suggested investors welcomed the restoration of leadership continuity at a company central to the global AI infrastructure boom.
-```
